@@ -414,3 +414,13 @@ These features are out of scope for MVP but could be added later:
 - [ ] Include a brief explanation or rationale behind using this specific branching strategy, to give contributors context and understanding of its benefits.
 - [ ] Consider adding a visual representation of the branch workflow to make it easier to understand at a glance.
 
+### From PR #10
+
+**Source:** [PR #10](https://github.com/bdaly101/AI-SQL-Dev/pull/10)
+
+- [ ] Consider adding a section on branch naming conventions to further standardize workflow.
+- [ ] Include examples of branch names that follow the recommended workflow.
+- [ ] Expand the testing guide to include automated testing strategies if applicable.
+- [ ] Consider linking to additional resources or tools that facilitate the recommended workflow.
+- [ ] Review other documentation files to ensure consistency in guidance and instructions.
+

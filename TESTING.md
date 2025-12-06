@@ -2,6 +2,8 @@
 
 This guide helps you test the AI-SQL-Dev CLI tool.
 
+> **Note**: When testing, create feature branches that target the `dev` branch.
+
 ## Manual Testing
 
 Since this is a CLI tool, manual testing is the recommended approach.
