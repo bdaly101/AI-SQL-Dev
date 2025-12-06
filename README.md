@@ -256,7 +256,9 @@ supabase db push
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and contribution guidelines.
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
+
+Issues and pull requests are appreciated.
 
 ## Dependencies
 
