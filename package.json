@@ -22,8 +22,12 @@
     "rls",
     "cli"
   ],
-  "author": "",
+  "author": "bdaly101",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bdaly101/AI-SQL-Dev.git"
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
     "chalk": "^4.1.2",
