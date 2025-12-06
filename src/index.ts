@@ -74,7 +74,7 @@ program
 
       if (!confirm) {
         console.log(chalk.yellow('\nAborted.'));
-        return;
+        process.exit(0);
       }
 
       // Step 3: Generate RLS policies with Claude
