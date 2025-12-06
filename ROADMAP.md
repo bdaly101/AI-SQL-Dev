@@ -414,3 +414,11 @@ These features are out of scope for MVP but could be added later:
 - [ ] Include a brief explanation or rationale behind using this specific branching strategy, to give contributors context and understanding of its benefits.
 - [ ] Consider adding a visual representation of the branch workflow to make it easier to understand at a glance.
 
+### From PR #9
+
+**Source:** [PR #9](https://github.com/bdaly101/AI-SQL-Dev/pull/9)
+
+- [ ] Consider adding a link to a detailed guide on branch workflows for users unfamiliar with Git branching strategies.
+- [ ] It might be helpful to include a brief explanation or rationale for why the `dev` branch is used as the base for feature branches, to provide context to the reader.
+- [ ] Ensure that all documentation updates are reviewed for technical accuracy and clarity by at least one other team member.
+
