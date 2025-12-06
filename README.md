@@ -331,3 +331,5 @@ MIT
 - [PostgreSQL Policy Syntax](https://www.postgresql.org/docs/current/sql-createpolicy.html)
 - [Anthropic API Docs](https://docs.anthropic.com)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/)
+
+<!-- Test fixed detection -->
