@@ -402,3 +402,15 @@ These features are out of scope for MVP but could be added later:
 - [Supabase RLS Documentation](https://supabase.com/docs/guides/auth/row-level-security)
 - [PostgreSQL Policy Syntax](https://www.postgresql.org/docs/current/sql-createpolicy.html)
 - [Anthropic API Docs](https://docs.anthropic.com)
+
+## Suggestions from AI Reviews
+
+### From PR #8
+
+**Source:** [PR #8](https://github.com/bdaly101/AI-SQL-Dev/pull/8)
+
+- [ ] Consider expanding the note to include a brief example or link to a more detailed explanation of how to work with the three-branch workflow.
+- [ ] Add a section about branch naming conventions if applicable, to further guide new contributors.
+- [ ] Include a brief explanation or rationale behind using this specific branching strategy, to give contributors context and understanding of its benefits.
+- [ ] Consider adding a visual representation of the branch workflow to make it easier to understand at a glance.
+
