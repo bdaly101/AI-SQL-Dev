@@ -2,6 +2,8 @@
 
 This guide demonstrates AI-SQL-Dev with practical examples.
 
+> **Note**: All examples assume you're working on a feature branch that will be merged into the `dev` branch.
+
 ## Setup
 
 1. Install dependencies:
