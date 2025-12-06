@@ -254,6 +254,10 @@ supabase db push
 - Teams needing consistent RLS policy generation
 - Projects requiring migration assistance with multi-tenant patterns
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and contribution guidelines.
+
 ## Dependencies
 
 - **commander**: CLI framework
