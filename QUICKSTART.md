@@ -2,6 +2,8 @@
 
 Get started with AI-SQL-Dev in 5 minutes!
 
+> **Note**: This project uses a three-branch workflow (main, staging, dev). Feature branches target the `dev` branch.
+
 ## Prerequisites
 
 - Node.js 16+ installed
