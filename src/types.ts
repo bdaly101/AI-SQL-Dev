@@ -50,3 +50,23 @@ export interface AffectedFile {
   reason: string;
   requiresUpdate: boolean;
 }
+
+// TypeScript type extraction types
+export interface TypeDefinition {
+  name: string;
+  filePath: string;
+  properties: PropertyDefinition[];
+  supabaseTable?: string;
+  kind: 'interface' | 'type' | 'zod' | 'supabase-generated';
+}
+
+export interface PropertyDefinition {
+  name: string;
+  type: string;
+  optional: boolean;
+}
+
+// Extended context with type information
+export interface FullProjectContext extends MigrationContext {
+  typeDefinitions: TypeDefinition[];
+}

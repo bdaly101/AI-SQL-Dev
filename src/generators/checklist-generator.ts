@@ -1,12 +1,13 @@
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { join, resolve, normalize } from 'path';
 import { AffectedFile, GeneratedMigration, SupabaseUsagePattern } from '../types';
 
 export class ChecklistGenerator {
   private outputDir: string;
 
   constructor(outputDir: string = '.') {
-    this.outputDir = outputDir;
+    // Normalize to prevent path traversal
+    this.outputDir = normalize(outputDir);
   }
 
   generateChecklist(
@@ -14,8 +15,16 @@ export class ChecklistGenerator {
     usagePatterns: SupabaseUsagePattern[]
   ): string {
     const affectedFiles = this.identifyAffectedFiles(migration, usagePatterns);
-    const filename = `${migration.timestamp}_checklist.md`;
-    const fullPath = join(this.outputDir, filename);
+    // Sanitize timestamp to prevent injection
+    const safeTimestamp = migration.timestamp.replace(/[^0-9]/g, '');
+    const filename = `${safeTimestamp}_checklist.md`;
+    const fullPath = resolve(this.outputDir, filename);
+    
+    // Security: Ensure the resolved path is within the output directory
+    const resolvedOutputDir = resolve(this.outputDir);
+    if (!fullPath.startsWith(resolvedOutputDir)) {
+      throw new Error('Invalid output path detected');
+    }
 
     const content = this.buildChecklistContent(migration, affectedFiles);
 

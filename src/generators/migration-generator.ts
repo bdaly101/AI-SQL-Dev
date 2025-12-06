@@ -1,18 +1,27 @@
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
-import { join } from 'path';
+import { join, resolve, normalize } from 'path';
 import { GeneratedMigration } from '../types';
 
 export class MigrationGenerator {
   private outputDir: string;
 
   constructor(outputDir: string = 'supabase/migrations') {
-    this.outputDir = outputDir;
+    // Normalize and resolve the output directory to prevent path traversal
+    this.outputDir = normalize(outputDir);
   }
 
   generateMigration(sqlContent: string, affectedTables: string[]): GeneratedMigration {
     const timestamp = this.generateTimestamp();
-    const filename = `${timestamp}_ai_generated_rls_policies.sql`;
-    const fullPath = join(this.outputDir, filename);
+    // Sanitize filename to prevent injection
+    const safeTimestamp = timestamp.replace(/[^0-9]/g, '');
+    const filename = `${safeTimestamp}_ai_generated_rls_policies.sql`;
+    const fullPath = resolve(this.outputDir, filename);
+    
+    // Security: Ensure the resolved path is within the output directory
+    const resolvedOutputDir = resolve(this.outputDir);
+    if (!fullPath.startsWith(resolvedOutputDir)) {
+      throw new Error('Invalid output path detected');
+    }
 
     // Ensure output directory exists
     if (!existsSync(this.outputDir)) {

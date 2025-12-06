@@ -107,14 +107,15 @@ export class MigrationCollector {
   private parseRLSPolicies(content: string, sourceFile: string): RLSPolicy[] {
     const policies: RLSPolicy[] = [];
     
-    // Match CREATE POLICY statements
-    const policyRegex = /CREATE\s+POLICY\s+([^\s]+)\s+ON\s+([^\s]+)(?:\s+FOR\s+(SELECT|INSERT|UPDATE|DELETE|ALL))?(?:\s+USING\s*\((.*?)\))?(?:\s+WITH\s+CHECK\s*\((.*?)\))?/gi;
+    // Match CREATE POLICY statements - handles multi-line and quoted names
+    // Pattern: CREATE POLICY "name" ON table FOR operation USING (...) WITH CHECK (...)
+    const policyRegex = /CREATE\s+POLICY\s+["']([^"']+)["']\s+ON\s+(\w+)\s+FOR\s+(SELECT|INSERT|UPDATE|DELETE|ALL)\s+(?:USING\s*\(([^;]+?)\))?(?:\s+WITH\s+CHECK\s*\(([^;]+?)\))?/gis;
     let match;
 
     while ((match = policyRegex.exec(content)) !== null) {
-      const name = match[1].replace(/["'`]/g, '');
-      const table = match[2].replace(/["'`]/g, '');
-      const operation = (match[3] || 'ALL') as 'SELECT' | 'INSERT' | 'UPDATE' | 'DELETE' | 'ALL';
+      const name = match[1];
+      const table = match[2];
+      const operation = match[3].toUpperCase() as 'SELECT' | 'INSERT' | 'UPDATE' | 'DELETE' | 'ALL';
       const using = match[4]?.trim();
       const withCheck = match[5]?.trim();
 

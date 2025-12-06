@@ -17,21 +17,39 @@ export class ClaudeService {
   async generateRLSPolicies(context: MigrationContext): Promise<string> {
     const prompt = this.buildPrompt(context);
 
-    const message = await this.client.messages.create({
-      model: this.model,
-      max_tokens: 4096,
-      messages: [{
-        role: 'user',
-        content: prompt
-      }]
-    });
+    try {
+      const message = await this.client.messages.create({
+        model: this.model,
+        max_tokens: 4096,
+        messages: [{
+          role: 'user',
+          content: prompt
+        }]
+      });
 
-    const response = message.content[0];
-    if (response.type === 'text') {
-      return response.text;
+      const response = message.content[0];
+      if (response.type === 'text') {
+        return response.text;
+      }
+      
+      return '';
+    } catch (error) {
+      // Sanitize error message to avoid leaking sensitive information
+      if (error instanceof Error) {
+        if (error.message.includes('401') || error.message.includes('Unauthorized')) {
+          throw new Error('API authentication failed. Please check your ANTHROPIC_API_KEY.');
+        }
+        if (error.message.includes('429') || error.message.includes('rate')) {
+          throw new Error('API rate limit exceeded. Please try again later.');
+        }
+        if (error.message.includes('500') || error.message.includes('503')) {
+          throw new Error('AI service is temporarily unavailable. Please try again later.');
+        }
+        // Generic error without exposing details
+        throw new Error('Failed to generate RLS policies. Please check your configuration and try again.');
+      }
+      throw new Error('An unexpected error occurred.');
     }
-    
-    return '';
   }
 
   private buildPrompt(context: MigrationContext): string {

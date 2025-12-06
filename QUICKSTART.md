@@ -25,7 +25,33 @@ npm run build
 
 ## Configuration
 
-Create a `.env` file or export your API key:
+### Option 1: Initialize Config File (Recommended)
+
+```bash
+npm start init
+```
+
+This creates `.ai-sql-dev.json` with default settings. Customize as needed:
+
+```json
+{
+  "migrations": {
+    "directory": "supabase/migrations"
+  },
+  "ai": {
+    "provider": "claude",
+    "model": "claude-3-5-sonnet-20241022"
+  },
+  "rls": {
+    "defaultPatterns": {
+      "userColumn": "user_id",
+      "tenantColumn": "tenant_id"
+    }
+  }
+}
+```
+
+### Option 2: Environment Variable Only
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...your-key-here
@@ -42,9 +68,19 @@ npm start analyze
 This will scan your project and show:
 - Tables in your database
 - Existing RLS policies
+- TypeScript types mapped to tables
 - Usage patterns in your TypeScript code
+- Security summary
 
-### 2. Generate RLS Policies (Requires API Key)
+### 2. Preview RLS Policies (Requires API Key)
+
+```bash
+npm start generate -- --dry-run
+```
+
+This shows what would be generated without writing files.
+
+### 3. Generate RLS Policies (Requires API Key)
 
 ```bash
 npm start generate
@@ -52,14 +88,15 @@ npm start generate
 
 The tool will:
 1. ✅ Scan migrations for table schemas
-2. ✅ Scan TypeScript for Supabase usage patterns
-3. ✅ Show you a summary
-4. ✅ Ask for confirmation
-5. ✅ Generate RLS policies using AI
-6. ✅ Create a migration file
-7. ✅ Create a review checklist
+2. ✅ Extract TypeScript type definitions
+3. ✅ Scan TypeScript for Supabase usage patterns
+4. ✅ Show you a summary
+5. ✅ Ask for confirmation
+6. ✅ Generate RLS policies using AI
+7. ✅ Create a migration file
+8. ✅ Create a review checklist
 
-### 3. Review and Apply
+### 4. Review and Apply
 
 Check the generated files:
 ```bash
@@ -80,12 +117,16 @@ supabase db push
 ```
 🤖 AI SQL Dev - Intelligent RLS Policy Generator
 
+Using config: .ai-sql-dev.json
+
 ✔ Found 3 tables and 0 existing RLS policies
 ✔ Found 5 Supabase client usage patterns
+✔ Found 4 types (2 mapped to tables)
 
 📊 Summary:
   Tables: users, projects, tasks
   Tables with user_id patterns: projects, tasks
+  TypeScript types mapped: User → users, Project → projects
 
 ? Proceed with AI-powered RLS policy generation? Yes
 ✔ RLS policies generated
@@ -115,6 +156,22 @@ npm start generate -- \
   --output ./database/migrations
 ```
 
+Or configure via `.ai-sql-dev.json`:
+
+```json
+{
+  "migrations": {
+    "directory": "database/migrations"
+  },
+  "apiCollection": {
+    "include": ["app/**/*.ts", "app/**/*.tsx"]
+  },
+  "output": {
+    "directory": "database/migrations"
+  }
+}
+```
+
 ## Troubleshooting
 
 ### "No table schemas found"
@@ -129,6 +186,11 @@ npm start generate -- \
 - Ensure TypeScript files contain Supabase client usage
 - The scanner looks for `.from('table')` patterns
 - Check that source files are in `src/` (or your custom path)
+
+### Config file not loading
+- Ensure file is named `.ai-sql-dev.json` or `ai-sql-dev.config.json`
+- Check JSON syntax is valid
+- Run `npm start init` to create a fresh config
 
 ## What's Next?
 
