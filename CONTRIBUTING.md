@@ -210,3 +210,5 @@ See [ROADMAP.md](ROADMAP.md) for planned features including:
 - VS Code extension
 - Policy validation
 - Migration diffing
+
+<!-- Test improved detection -->
