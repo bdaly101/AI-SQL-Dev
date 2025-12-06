@@ -1,5 +1,14 @@
 # Contributing to AI-SQL-Dev
 
+## Development Workflow
+
+This project uses a three-branch workflow:
+- **dev**: All feature PRs target this branch
+- **staging**: Pre-production testing branch
+- **main**: Production-ready code
+
+Feature branches are automatically created when committing to `dev`, and PRs are created targeting `dev`.
+
 ## Architecture
 
 ### Directory Structure
