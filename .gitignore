@@ -46,3 +46,4 @@ tests/temp-*/
 # Debug
 .debug/
 # Test detection
+# Another test
