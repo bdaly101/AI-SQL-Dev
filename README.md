@@ -258,7 +258,10 @@ supabase db push
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 
-Issues and pull requests are appreciated.
+Issues and pull requests are appreciated. This project uses a three-branch workflow:
+- **dev**: Development branch where feature PRs are merged
+- **staging**: Testing branch for pre-production validation
+- **main**: Production-ready code
 
 ## Dependencies
 
