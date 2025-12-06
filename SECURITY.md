@@ -1,5 +1,7 @@
 # Security Policy
 
+> **Note**: Security reports should follow the three-branch workflow (dev → staging → main).
+
 ## Supported Versions
 
 | Version | Supported          |
